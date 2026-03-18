@@ -3,6 +3,8 @@
 const { Command } = require("commander");
 const figlet = require("figlet");
 const chalk = require("chalk");
+const systemInfo = require("../commands/system");
+const dockerCommand = require("../commands/docker");
 
 const program = new Command();
 
@@ -24,4 +26,14 @@ program
   .action(() => {
     console.log("Hello Ankush 🚀");
   });
+
+program
+  .command("sys")
+  .description("Show system info")
+  .action(systemInfo);
+
+program
+  .command("docker <cmd>")
+  .description("Run docker commands")
+  .action(dockerCommand);
 program.parse(process.argv);
