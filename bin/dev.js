@@ -3,6 +3,7 @@
 const { Command } = require("commander");
 const figlet = require("figlet");
 const chalk = require("chalk");
+const startDashboard = require("../commands/Start/start")
 const systemInfo = require("../commands/system");
 const dockerCommand = require("../commands/docker");
 
@@ -13,6 +14,11 @@ console.log(
     figlet.textSync("DEV CLI", { horizontalLayout: "full" })
   )
 );
+
+program
+  .command("start")
+  .description("Interactive Dev Dashboard")
+  .action(startDashboard);
 
 program
   .name("dev")
