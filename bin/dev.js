@@ -30,7 +30,7 @@ program
   .command("hello")
   .description("Test command")
   .action(() => {
-    console.log("Hello Ankush 🚀");
+    console.log("Updated CLI 🚀");
   });
 
 program
