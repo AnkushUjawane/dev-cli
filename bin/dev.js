@@ -6,8 +6,11 @@ const chalk = require("chalk");
 const startDashboard = require("../commands/Start/start")
 const systemInfo = require("../commands/system");
 const dockerCommand = require("../commands/docker");
+const loadPlugins = require("../utils/pluginLoader")
 
 const program = new Command();
+
+loadPlugins(program);
 
 console.log(
   chalk.green(
