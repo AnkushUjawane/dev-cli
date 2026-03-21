@@ -7,6 +7,7 @@ const startDashboard = require("../commands/Start/start")
 const systemInfo = require("../commands/system");
 const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
+const startMonitor = require("../commands/Monitor/monitor")
 
 const program = new Command();
 
@@ -45,4 +46,9 @@ program
   .command("docker <cmd>")
   .description("Run docker commands")
   .action(dockerCommand);
+
+program
+  .command("monitor")
+  .description("Live system monitor")
+  .action(startMonitor);
 program.parse(process.argv);
