@@ -8,6 +8,7 @@ const systemInfo = require("../commands/system");
 const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
+const workspace = require("../commands/Workspace/workspace")
 
 const program = new Command();
 
@@ -34,7 +35,7 @@ program
   .command("hello")
   .description("Test command")
   .action(() => {
-    console.log("Updated CLI 🚀");
+    console.log("Welcome To Dev CLI");
   });
 
 program
@@ -51,4 +52,10 @@ program
   .command("monitor")
   .description("Live system monitor")
   .action(startMonitor);
+
+program
+  .command("workspace <action>")
+  .description("Manage dev workspace")
+  .action(workspace);
+
 program.parse(process.argv);
