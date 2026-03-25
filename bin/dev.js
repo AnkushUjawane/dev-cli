@@ -30,7 +30,6 @@ program
   .description("Ultimate Linux Developer CLI")
   .version("1.0.0");
 
-  
 program
   .command("hello")
   .description("Test command")
@@ -54,8 +53,10 @@ program
   .action(startMonitor);
 
 program
-  .command("workspace <action>")
+  .command("workspace <action> [name] [num]")
   .description("Manage dev workspace")
-  .action(workspace);
+  .action((action, name, num) => {
+    workspace(action, name, num);
+  });
 
 program.parse(process.argv);

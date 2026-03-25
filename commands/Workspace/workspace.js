@@ -11,29 +11,27 @@ function run(cmd) {
     });
 }
 
-async function workspace(action) {
+async function workspace(action, name = "dev", num = 4) {
     try {
         if (action === "start") {
-            console.log(chalk.green("🚀 Starting Dev Workspace..."));
+            const panes = parseInt(num) || 4;
+            const session = name;
 
-            // Create session
-            await run("tmux new-session -d -s dev");
+            console.log(chalk.green(`Starting Workspace : ${session}`));
+            console.log(chalk.yellow(`Creating ${panes} panes... \n`))
 
-            // Create layout (4 panes)
-            await run("tmux split-window -h -t dev");
-            await run("tmux split-window -v -t dev");
-            await run("tmux select-pane -t 0");
-            await run("tmux split-window -v -t dev");
+            await run(`tmux kill-session -t ${session} || true`);
 
-            // Run YOUR CLI inside panes
-            await run("tmux send-keys -t dev:0.0 'dev start' C-m");     // Dashboard
-            await run("tmux send-keys -t dev:0.1 'dev monitor' C-m");   // Monitor
-            await run("tmux send-keys -t dev:0.2 'docker ps' C-m");     // Logs/docker
-            await run("tmux send-keys -t dev:0.3 'bash' C-m");          // Free shell
+            await run(`tmux new-session -d -s ${session}`);
+
+            for (let i = 1; i < panes; i++){
+                await run(`tmux split-window -t ${session}`);
+                await run(`tmux select-layout -t ${session} tiled`);
+            }
 
             console.log(chalk.blue("Launching workspace..."));
 
-            const tmux = spawn("tmux", ["attach", "-t", "dev"], {
+            const tmux = spawn("tmux", ["attach", "-t", session], {
                 stdio: "inherit"
             });
 
@@ -43,26 +41,31 @@ async function workspace(action) {
         }
 
         if (action === "stop") {
-            await run("tmux kill-session -t dev");
+            await run(`tmux kill-session -t ${name}`);
             console.log(chalk.red("Workspace stopped"));
         }
 
         if (action === "attach") {
-            exec("tmux attach -t dev");
-        }
-
-        if(action === "ls"){
-            exec("tmux ls", (err, stdout, stderr) => {
-                if(err){
-                    console.log(chalk.red("No Active Tmux Sessions"));
-                    return;
-                }
-                console.log("Active Workspaces:");
-
-                console.log(chalk.green(stdout));
+            spawn("tmux", ["attach", "-t", name], {
+                stdio: "inherit"
             });
         }
 
+        if(action === "ls"){
+            exec("tmux ls", (err, stdout) => {
+                if(err){
+                    console.log(chalk.red("No Active Workspaces"));
+                    return;
+                }
+                const sessions = stdout.trim().split("\n");
+                console.log(chalk.cyan("Active Workspaces:\n"));
+
+                sessions.forEach((s, i) => {
+                    const sessionName = s.split(":")[0];
+                    console.log(chalk.green(`${i+1}. ${chalk.greenBright(sessionName)}`))
+                })
+            });
+        }
     } catch (err) {
         console.log(chalk.red("Error:"), err);
     }
