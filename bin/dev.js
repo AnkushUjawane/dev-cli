@@ -9,7 +9,6 @@ const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
 const workspace = require("../commands/Workspace/workspace")
-const aiChat = require("../commands/AI/ai")
 
 const program = new Command();
 
