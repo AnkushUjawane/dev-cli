@@ -60,9 +60,4 @@ program
     workspace(action, name, num);
   });
 
-program
-  .command("ai")
-  .description("Chat with CodeLlama AI")
-  .action(aiChat);
-
 program.parse(process.argv);
