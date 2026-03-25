@@ -9,6 +9,7 @@ const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
 const workspace = require("../commands/Workspace/workspace")
+const aiChat = require("../commands/AI/ai")
 
 const program = new Command();
 
@@ -58,5 +59,10 @@ program
   .action((action, name, num) => {
     workspace(action, name, num);
   });
+
+program
+  .command("ai")
+  .description("Chat with CodeLlama AI")
+  .action(aiChat);
 
 program.parse(process.argv);
