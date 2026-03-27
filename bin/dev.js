@@ -8,7 +8,7 @@ const systemInfo = require("../commands/system");
 const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
-const workspace = require("../commands/Workspace/workspace")
+const createWorkspace = require("../commands/Workspace/create")
 
 const program = new Command();
 
@@ -16,7 +16,8 @@ loadPlugins(program);
 
 console.log(
   chalk.green(
-    figlet.textSync("DEV CLI", { horizontalLayout: "full" })
+    console.log(" "),
+    figlet.textSync("DEV-CLI", { horizontalLayout: "full" })
   )
 );
 
@@ -53,10 +54,15 @@ program
   .action(startMonitor);
 
 program
-  .command("workspace <action> [name] [num]")
+  .command("workspace <action> [name]")
   .description("Manage dev workspace")
-  .action((action, name, num) => {
-    workspace(action, name, num);
+  .action((action, name) => {
+    if(action === "create"){
+      createWorkspace(name);
+    }
+    else{
+      console.log(chalk.red("Unknown Workspace Action"))
+    }
   });
 
 program.parse(process.argv);
