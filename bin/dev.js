@@ -9,7 +9,12 @@ const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
 const createWorkspace = require("../commands/Workspace/create")
+<<<<<<< Updated upstream
 const listWorkspaces = require("../commands/Workspace/list")
+=======
+const listWorkspaces = require("../commands/Workspace/list");
+const { act } = require("react");
+>>>>>>> Stashed changes
 
 const program = new Command();
 
