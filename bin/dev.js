@@ -9,24 +9,17 @@ const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
 const createWorkspace = require("../commands/Workspace/create")
-<<<<<<< Updated upstream
 const listWorkspaces = require("../commands/Workspace/list")
-=======
-const listWorkspaces = require("../commands/Workspace/list");
-const { act } = require("react");
->>>>>>> Stashed changes
 
 const program = new Command();
 
 loadPlugins(program);
 
-console.log(
-  chalk.green(
-    console.log(" "),
-    figlet.textSync("DEV-CLI", { horizontalLayout: "full" })
-  )
-);
-
+if (process.argv.length <= 2) {
+  console.log(
+    chalk.green(figlet.textSync("DEV-CLI", { horizontalLayout: "full" }))
+  );
+}
 program
   .command("start")
   .description("Interactive Dev Dashboard")
