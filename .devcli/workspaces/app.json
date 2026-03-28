@@ -1,15 +1,15 @@
 {
   "name": "app",
-  "path": "home/ankush/",
+  "path": ".",
   "terminals": [
     {
       "name": "terminal-1",
-      "cmd": "dev app start"
+      "cmd": "dev start"
     },
     {
       "name": "terminal-2",
-      "cmd": "dev app1 start"
+      "cmd": "dev start app"
     }
   ],
-  "createdAt": "2026-03-26T18:53:06.348Z"
+  "createdAt": "2026-03-28T18:11:30.851Z"
 }
