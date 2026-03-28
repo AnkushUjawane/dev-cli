@@ -9,6 +9,7 @@ const dockerCommand = require("../commands/docker");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
 const createWorkspace = require("../commands/Workspace/create")
+const listWorkspaces = require("../commands/Workspace/list")
 
 const program = new Command();
 
@@ -59,6 +60,9 @@ program
   .action((action, name) => {
     if(action === "create"){
       createWorkspace(name);
+    }
+    else if(action === "list" || action === "ls"){
+      listWorkspaces();
     }
     else{
       console.log(chalk.red("Unknown Workspace Action"))
