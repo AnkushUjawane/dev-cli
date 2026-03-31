@@ -10,6 +10,8 @@ const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
 const createWorkspace = require("../commands/Workspace/create")
 const listWorkspaces = require("../commands/Workspace/list")
+const startWorkspace = require("../commands/Workspace/start")
+
 
 const program = new Command();
 
@@ -61,6 +63,9 @@ program
     }
     else if(action === "list" || action === "ls"){
       listWorkspaces();
+    }
+    else if(action === "start"){
+      startWorkspace(name);
     }
     else{
       console.log(chalk.red("Unknown Workspace Action"))
