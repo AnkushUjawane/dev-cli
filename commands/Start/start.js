@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const systemInfo = require("../system");
-const dockerCommand = require("../docker");
+const dockerCommand = require("../doctor");
 
 async function startDashboard() {
   while (true) {
