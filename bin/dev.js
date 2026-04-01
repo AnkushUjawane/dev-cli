@@ -46,6 +46,7 @@ program
 
 program
   .command("doctor")
+  .option("--fix", "Automatically fix issues")
   .description("Check System Health")
   .action(dockerCommand);
 
