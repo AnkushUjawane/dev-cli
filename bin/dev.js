@@ -5,7 +5,7 @@ const figlet = require("figlet");
 const chalk = require("chalk");
 const startDashboard = require("../commands/Start/start")
 const systemInfo = require("../commands/system");
-const dockerCommand = require("../commands/docker");
+const dockerCommand = require("../commands/doctor");
 const loadPlugins = require("../utils/pluginLoader")
 const startMonitor = require("../commands/Monitor/monitor")
 const createWorkspace = require("../commands/Workspace/create")
@@ -45,8 +45,8 @@ program
   .action(systemInfo);
 
 program
-  .command("docker <cmd>")
-  .description("Run docker commands")
+  .command("doctor")
+  .description("Check System Health")
   .action(dockerCommand);
 
 program
